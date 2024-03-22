@@ -30,12 +30,12 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <main className="App-main">
         <Tabs tabs={ tabs } active = { activeTab } setActive = { setActiveTab }/>
         {
           activeTab === 'Encode' ? <Encode imageData={ imageData } loadImage={ loadImage } /> : <Decode />
         }
-      </header>
+      </main>
     </div>
   );
 }
