@@ -1,14 +1,8 @@
-import { useEffect } from "react"
-
 const Tab = ({ value, active, setActive }) => {
 
     const handleClick = () => {
         setActive(value)
     }
-
-    useEffect(() => {
-        console.log(active)
-    })
 
     return (
         <li>
