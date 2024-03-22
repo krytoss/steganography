@@ -3,14 +3,17 @@ import Textarea from "./elements/Textarea"
 import Button from "./elements/Button"
 import Canvas from "./elements/Canvas"
 import { useState, useEffect } from "react"
+import useFileInput from "./hooks/useFileInput"
 
-const Encode = ({ imageData, loadImage }) => {
+const Encode = ({ loadImage }) => {
 
     const canvasId = 'encodeCanvas'
+    const [ imageData, setImageData ] = useState(null)
     const [ message, setMessage ] = useState(null)
     const [ scannedData, setScannedData ] = useState(null)
     const [ newImgData, setNewImgData ] = useState(null)
     const [ newImg, setNewImg ] = useState(null)
+    const {...input} = useFileInput(setImageData)
 
     const encodeMessage = () => {
         if (message) {
@@ -34,6 +37,8 @@ const Encode = ({ imageData, loadImage }) => {
                 }
             }
             setNewImgData(encodedImgData)
+        } else {
+            alert("You need to enter a message!")
         }
     }
 
@@ -75,7 +80,7 @@ const Encode = ({ imageData, loadImage }) => {
                     <Canvas id={canvasId + '-uploaded'} />
                     { imageData && <img alt='Message carrier' src={imageData} />}
                     { imageData && <Textarea placeholder='Enter your message to be encoded' onChange={ setMessage } value={ message } />}
-                    <Input loadImage={ loadImage } type='file' />
+                    <Input {...input} />
                 </div>
                 <div>
                     { imageData && <Button value='Encode the message' onClick={ encodeMessage } />}

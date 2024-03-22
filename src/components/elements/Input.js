@@ -1,7 +1,7 @@
-const Input = ({ type, loadImage }) => {
+const Input = ({ type, onChange }) => {
 
     const handleChange = (e) => {
-        loadImage(e)
+        onChange(e)
     }
 
     return <input type = {type} onChange={ handleChange }/>
