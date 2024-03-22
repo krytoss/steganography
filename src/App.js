@@ -11,6 +11,7 @@ function App() {
   const tabs = [ 'Encode', 'Decode' ]
 
   const loadImage = (e) => {
+    setImageData(null)
     const file = e.target.files[0];
     const reader = new FileReader();
 

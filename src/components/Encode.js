@@ -10,6 +10,7 @@ const Encode = ({ imageData, loadImage }) => {
     const [ message, setMessage ] = useState(null)
     const [ scannedData, setScannedData ] = useState(null)
     const [ newImgData, setNewImgData ] = useState(null)
+    const [ newImg, setNewImg ] = useState(null)
 
     const encodeMessage = () => {
         if (message) {
@@ -37,28 +38,35 @@ const Encode = ({ imageData, loadImage }) => {
     }
 
     useEffect(() => {
+        const canvas = document.getElementById(canvasId + '-generated')
+        const ctx = canvas.getContext('2d')
         if (newImgData) {
-            console.log("teraz")
-            const canvas = document.getElementById(canvasId + '-generated')
             canvas.width = newImgData.width
             canvas.height = newImgData.height
-            const ctx = canvas.getContext('2d')
             ctx.putImageData(newImgData, 0, 0)
+            setNewImg(canvas.toDataURL())
+        } else {
+            
         }
-    }, [newImgData])
+    }, [ newImgData ])
 
     useEffect(() => {
-      const img = new Image()
-      img.onload = () => {
-        const canvas = document.getElementById(canvasId + '-uploaded')
-        const ctx = canvas.getContext('2d')
-        canvas.width = img.width
-        canvas.height = img.height
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-        setScannedData(ctx.getImageData(0, 0, canvas.width, canvas.height))
-      }
-      img.src = imageData
-    }, [ imageData ])
+        if (imageData) {
+            const img = new Image()
+            img.onload = () => {
+                const canvas = document.getElementById(canvasId + '-uploaded')
+                const ctx = canvas.getContext('2d')
+                canvas.width = img.width
+                canvas.height = img.height
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+                setScannedData(ctx.getImageData(0, 0, canvas.width, canvas.height))
+            }
+            img.src = imageData
+        } else {
+            setNewImg(null)
+            setNewImgData(null)
+        }
+    }, [ imageData, setNewImg, setNewImgData ])
 
     return (
         <div id='encode'>
@@ -74,7 +82,13 @@ const Encode = ({ imageData, loadImage }) => {
                 </div>
                 <div>
                     <Canvas id={canvasId + '-generated'} />
-                    {  }
+                    {
+                        newImg &&
+                        <>
+                            <img alt='Encoded message' src={newImg} />
+                            <a download='encoded.png' href={newImg}>Download</a>
+                        </>
+                    }
                 </div>
             </div>
         </div>
