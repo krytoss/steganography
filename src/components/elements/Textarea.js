@@ -1,7 +1,6 @@
 const Textarea = ({ placeholder, value, onChange }) => {
 
     const handleChange = (e) => {
-        console.log(e)
         onChange( e.target.value )
     }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Tabs from './components/Tabs';
 import Encode from './components/Encode';
@@ -13,6 +13,8 @@ function App() {
   const loadImage = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
+
+    console.log(file)
 
     reader.addEventListener(
       "load",
