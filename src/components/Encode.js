@@ -1,11 +1,12 @@
 import Input from "./elements/Input"
 
-const Encode = () => {
+const Encode = ({ imageData, loadImage }) => {
 
     return (
-        <>
-            <Input type='file' />
-        </>
+        <div id='encode'>
+            { imageData && <img alt='Uploaded image' src={ imageData } />}
+            <Input loadImage={ loadImage } type='file' />
+        </div>
     )
 
 }
