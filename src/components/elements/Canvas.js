@@ -1,6 +1,6 @@
 const Canvas = ({ id }) => {
     return (
-        <canvas id={id} />
+        <canvas style={{ display: 'none'}} id={id} />
     )
 }
 
