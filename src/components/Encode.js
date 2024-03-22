@@ -9,7 +9,7 @@ const Encode = ({ loadImage }) => {
 
     const canvasId = 'encodeCanvas'
     const [ imageData, setImageData ] = useState(null)
-    const [ message, setMessage ] = useState(null)
+    const [ message, setMessage ] = useState('')
     const [ scannedData, setScannedData ] = useState(null)
     const [ newImgData, setNewImgData ] = useState(null)
     const [ newImg, setNewImg ] = useState(null)
