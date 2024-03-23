@@ -1,7 +1,7 @@
 const Textarea = ({ placeholder, value, maxLength, onChange }) => {
 
     const handleChange = (e) => {
-        const text = e.target.value.split("").filter((c) => c.charCodeAt() <= 266)
+        const text = e.target.value.split("").filter((c) => c.charCodeAt() <= 255)
         onChange( text.join("") )
     }
 
