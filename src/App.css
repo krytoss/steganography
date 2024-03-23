@@ -2,6 +2,9 @@
   text-align: center;
   background-color: #282c34;
   padding: 0 5vw;
+  max-width: 100vw;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 
 .App-main {
