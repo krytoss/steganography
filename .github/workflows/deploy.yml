@@ -1,0 +1,33 @@
+name: build-and-deploy
+on: push
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4
+            - name: install node
+              uses: actions/setup-node@v4
+            - name: install dependencies
+              run:  npm ci
+            - name: build project
+              run: npm run build
+            - name: upload artifact
+              uses: actions/upload-artifact@v3
+              with:
+                name: production-files
+                path: ./build
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - name: download artifact
+              uses: actions/download-artifact@v3
+              with:
+                name: production-files
+                path: ./build
+            - name: deploy to gh pages
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                github_token: ${{ secrets.CI_CD_TOKEN }}
+                publish_dir: ./build
