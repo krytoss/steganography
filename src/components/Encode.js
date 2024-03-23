@@ -5,7 +5,7 @@ import Canvas from "./elements/Canvas"
 import { useState, useEffect } from "react"
 import useFileInput from "./hooks/useFileInput"
 
-const Encode = ({ loadImage }) => {
+const Encode = () => {
 
     const canvasId = 'encodeCanvas'
     const [ imageData, setImageData ] = useState(null)
@@ -78,7 +78,7 @@ const Encode = ({ loadImage }) => {
                 <div>
                     <Canvas id={canvasId + '-uploaded'} />
                     { imageData && <img alt='Message carrier' src={imageData} />}
-                    { imageData && <Textarea placeholder='Enter your message to be encoded (max 255 characters)' onChange={ setMessage } value={ message } maxLength={255} />}
+                    { imageData && <Textarea placeholder='Enter your message to be encoded (max 255 characters and without using extended latin characters)' onChange={ setMessage } value={ message } maxLength={255} />}
                     <Input {...input} />
                 </div>
                 <div>
