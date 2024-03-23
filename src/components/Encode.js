@@ -22,17 +22,16 @@ const Encode = ({ loadImage }) => {
             const bin = ("00000000" + msgLength.toString(2)).slice(-8)
             if (scannedData) {
                 for (let i = 0; i < 8; i++) {
-                    const val = scannedData.data[i] % 2 === 0 ? scannedData.data[i] : scannedData.data[i] - 1
-                    encodedImgData.data[i] = bin[i] === 0 ? val : val + 1
+                    const val = (scannedData.data[i] % 2) === 0 ? scannedData.data[i] : scannedData.data[i] - 1
+                    encodedImgData.data[i] = (bin[i] === '0') ? val : val + 1
                 }
                 for (let i = 0; i < msgLength; i++) {
                     const character = message[i]
                     const binChar = ("00000000" + character.charCodeAt().toString(2)).slice(-8)
                     for (let j = 0; j < 8; j++) {
-                        const nth = ((i + 1) * 8) + j
+                        const nth = ((i + 1) * 8) + 1 + j
                         const val = scannedData.data[nth] % 2 === 0 ? scannedData.data[nth] : scannedData.data[nth] - 1
-                        
-                        encodedImgData.data[nth] = binChar[j] === 0 ? val : val + 1
+                        encodedImgData.data[nth] = binChar[j] === '0' ? val : val + 1
                     }
                 }
             }
@@ -75,7 +74,7 @@ const Encode = ({ loadImage }) => {
 
     return (
         <div id='encode'>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-4 flex items-center justify-center">
                 <div>
                     <Canvas id={canvasId + '-uploaded'} />
                     { imageData && <img alt='Message carrier' src={imageData} />}
