@@ -6,7 +6,7 @@ const Tab = ({ value, active, setActive }) => {
 
     return (
         <li>
-            <a
+            <button
                 href='#'
                 aria-current='page'
                 className={
@@ -16,7 +16,7 @@ const Tab = ({ value, active, setActive }) => {
                 onClick = { handleClick }
             >
                 { value }
-            </a>
+            </button>
         </li>
     )
 }
