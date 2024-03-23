@@ -78,7 +78,7 @@ const Encode = ({ loadImage }) => {
                 <div>
                     <Canvas id={canvasId + '-uploaded'} />
                     { imageData && <img alt='Message carrier' src={imageData} />}
-                    { imageData && <Textarea placeholder='Enter your message to be encoded' onChange={ setMessage } value={ message } />}
+                    { imageData && <Textarea placeholder='Enter your message to be encoded (max 255 characters)' onChange={ setMessage } value={ message } maxLength={255} />}
                     <Input {...input} />
                 </div>
                 <div>
